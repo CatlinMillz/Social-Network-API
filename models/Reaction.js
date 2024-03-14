@@ -1,32 +1,35 @@
 const { Schema, Types } = require('mongoose');
-
-const friendSchema = new Schema(
-  {
-    friendId: {
-      type: Schema.Types.ObjectId,
-      default: () => new Types.ObjectId(),
+const reactionSchema = new Schema(
+    {
+        reactionId: {
+            type: Schema.Types.ObjectId,
+            default: () => new Types.ObjectId(),
+        },
+        reactionBody: {
+            type: String,
+            required: true,
+            maxLength: 280,
+        },
+        username: {
+            type: String,
+            required: true,
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now,
+            timestamp: {
+                type: Date,
+                get: (date) => {
+                    if (date) return date.toISOString().split("T") [0];
+                },
+            },
+        },
     },
-    friendName: {
-      type: String,
-      required: true,
-      maxlength: 50,
-      minlength: 4,
-      default: 'Unnamed assignment',
-    },
-    score: {
-      type: Number,
-      required: true,
-      default: () => Math.floor(Math.random() * (100 - 70 + 1) + 70),
-    },
-    createdAt: {
-      type: Date,
-      default: Date.now,
-    },
-  },
-  {
-    toJSON: {
-      getters: true,
-    },
-    id: false,
-  }
-);
+    {
+        toJSON: {
+            getters: true,
+        },
+        id: false,
+    }
+)
+module.exports = reactionSchema;
