@@ -1,6 +1,6 @@
 const { connect, connection } = require('mongoose');
 
-const connectionString = 'mongodb://127.0.0.1:27017/usersDB';
+const connectionString = 'mongodb://127.0.0.1:27017/SM_DB';
 
 connect(connectionString);
 
